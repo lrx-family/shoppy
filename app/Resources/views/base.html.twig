@@ -6,9 +6,6 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-            crossorigin="anonymous"></script>
     <style>
         body {
             padding-top: 50px;
@@ -28,14 +25,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('app_resume') }}">Shoppy</a>
+            <a class="navbar-brand" href="{{ path('app_home') }}">Shoppy</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('app_home') }}">Liste des articles</a></li>
-                <li><a href="{{ path('app_categories') }}">Liste des rayons</a></li>
-                <li><a href="{{ path('app_newCategory') }}">Ajouter un rayon</a></li>
-                <li><a href="{{ path('app_newItem') }}">Ajouter un article</a></li>
+                <li><a href="{{ path('app_list_categories') }}">Liste des rayons</a></li>
+                <li><a href="{{ path('app_create_item') }}">Ajouter un article</a></li>
 
 
             </ul>
@@ -45,6 +40,10 @@
 <div class="container">
     {% block body %}    {% endblock %}
 </div>
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

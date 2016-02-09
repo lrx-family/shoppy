@@ -2,20 +2,23 @@ app_home:
     path:      /
     defaults:  { _controller: AppBundle:Default:index }
 
-app_categories:
+app_list_categories:
     path:     /categories
     defaults: { _controller: AppBundle:Default:listCategories }
 
-app_newCategory:
+app_create_category:
     path:     /newCategory
     defaults: { _controller: AppBundle:Default:addCategory }
 
-app_resume:
-    path:     /resume
-    defaults: { _controller: AppBundle:Default:resume }
-
-app_newItem:
+app_create_item:
     path:     /newItem
     defaults: { _controller: AppBundle:Default:addItem }
 
+app_delete_category:
+    path:     /deleteCategory/{id}
+    defaults: { _controller: AppBundle:Default:deleteCategory }
+
+app_delete_item:
+    path:     /deleteItem/{id}
+    defaults: { _controller: AppBundle:Default:deleteItem }
 

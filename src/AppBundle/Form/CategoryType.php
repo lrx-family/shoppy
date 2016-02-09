@@ -25,6 +25,7 @@ class CategoryType extends AbstractType
         $builder
             ->add('label');
 
+
     }
 
     /**

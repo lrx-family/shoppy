@@ -9,17 +9,17 @@
         <tr>
             <th> N°</th>
             <th> Désignation :</th>
-            <th> Rayon :</th>
             <th> Qté :</th>
         </tr>
         </thead>
         <tbody>
         {% for it in items %}
             <tr>
-                <td>{{ it.id }}</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ it.label }}</td>
-                <td>{{ it.category.label}}</td>
-                <td>{{ it.quantity}}</td>
+                <td>{{ it.category.label }}</td>
+                <td>{{ it.quantity }}</td>
+                <td><a href="{{ path('app_delete_item', {id: it.id}) }}">delete</a></td>
             </tr>
         {% endfor %}
         </tr>
@@ -30,4 +30,12 @@
 
 {% block stylesheets %}
 
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function confirmDelete(label) {
+            var message = 'Confirmer la suppression de ' + label;
+            return confirm(message);
+        }
+    </script>
 {% endblock %}

@@ -4,21 +4,31 @@
 
     <h1>Liste des catégories</h1>
 
+    <div>
+        <a href="#">Ajouter un nouveau rayon</a>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+    </div>
+
     <table class="table">
         <thead>
         <tr>
-            <th> N°</th>
             <th> Rayon :</th>
         </tr>
         </thead>
         <tbody>
         {% for cat in categories %}
             <tr>
-                <td>{{ cat.id }}</td>
                 <td>{{ cat.label }}</td>
+                <td><a href="{{ path('app_delete_category', {id: cat.id}) }}"
+                       onclick="return confirmDelete('{{ cat.label }}');"
+                    >Delete</a></td>
+
+
             </tr>
         {% endfor %}
-        </tr>
+
         </tbody>
     </table>
 
@@ -26,4 +36,12 @@
 
 {% block stylesheets %}
 
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function confirmDelete(label) {
+            var message = 'Confirmer la suppression de ' + label;
+            return confirm(message);
+        }
+    </script>
 {% endblock %}

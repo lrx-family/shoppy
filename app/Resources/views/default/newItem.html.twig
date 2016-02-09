@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Enregistrer un nouvel article</h1>
+
+    {{ form_start(form) }}
+    <div class='col-md-offset-2 col-md-6'>
+        {{ form_widget(form) }}
+    </div>
+    <div class='col-md-offset-2 col-md-6'>
+        <input type="submit" value="Valider"/>
+    </div>
+    {{ form_end(form) }}
+    <div>
+        <a href="{{ path('app_home') }}">Back to the list</a>
+    </div>
+{% endblock %}

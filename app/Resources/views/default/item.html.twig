@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste des articles</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th> N°</th>
+            <th> Désignation :</th>
+            <th> Rayon :</th>
+            <th> Qté :</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for it in items %}
+            <tr>
+                <td>{{ it.id }}</td>
+                <td>{{ it.label }}</td>
+                <td>{{ it.category.label}}</td>
+                <td>{{ it.quantity}}</td>
+
+            </tr>
+        {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

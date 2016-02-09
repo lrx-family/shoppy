@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste des catégories</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th> N°</th>
+            <th> Rayon :</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cat in categories %}
+            <tr>
+                <td>{{ cat.id }}</td>
+                <td>{{ cat.label }}</td>
+            </tr>
+        {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

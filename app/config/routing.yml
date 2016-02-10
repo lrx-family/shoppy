@@ -9,10 +9,6 @@ app_list_categories:
     path:     /categories
     defaults: { _controller: AppBundle:Default:listCategories }
 
-app_create_category:
-    path:     /newCategory
-    defaults: { _controller: AppBundle:Default:addCategory }
-
 app_create_item:
     path:     /newItem
     defaults: { _controller: AppBundle:Default:addItem }

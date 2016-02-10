@@ -50,25 +50,6 @@ class DefaultController extends Controller
         ));
     }
 
-    public function addCategoryAction(Request $request)
-    {
-        $cat = new Category();
-        $form = $this->createForm('AppBundle\Form\CategoryType', $cat);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($cat);
-            $em->flush();
-
-            return $this->redirectToRoute('app_list_categories');
-        }
-
-        return $this->render(':default:newCategory.html.twig', array(
-            'category' => $cat,
-            'form' => $form->createView()));
-
-    }
 
     public function addItemAction(Request $request)
     {

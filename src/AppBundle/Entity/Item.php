@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
@@ -23,12 +25,14 @@ class Item
     /**
      * @var string
      * @ORM\Column(name="label", type="string", length=200)
+     * @Assert\NotBlank
      */
     protected $label;
 
     /**
      * @var int
      * @ORM\Column(name="quantity", type="integer", length=200)
+     * @Assert\Range(min=1)
      */
     protected $quantity;
 

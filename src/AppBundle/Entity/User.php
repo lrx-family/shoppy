@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: brtrnd
- * Date: 10/02/16
- * Time: 00:43
- */
 
 namespace AppBundle\Entity;
 
@@ -23,10 +17,4 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 }

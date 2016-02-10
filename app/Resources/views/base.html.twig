@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <title>{% block title %}Welcome to my shopping app!{% endblock %}</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('supermarket68.png') }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <style>
         body {
             padding-top: 50px;
+
         }
     </style>
     {% block stylesheets %}{% endblock %}
@@ -32,10 +33,11 @@
                 <li><a href="{{ path('app_list_categories') }}">Liste des rayons</a></li>
                 <li><a href="{{ path('app_create_item') }}">Ajouter un article</a></li>
                 {% if app.user %}
-                    <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                    <li><a>{{ app.user }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                 {% else %}
-                    <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
-                    <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}">Authentification</a></li>
+                    <li><a href="{{ path('fos_user_registration_register') }}">S'enregister</a></li>
                 {% endif %}
 
 

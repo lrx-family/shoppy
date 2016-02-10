@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: brtrnd
- * Date: 08/02/16
- * Time: 22:22
- */
 
 namespace AppBundle\Entity;
 
@@ -62,7 +56,4 @@ class Category
     {
         $this->label = $label;
     }
-
-
-
 }

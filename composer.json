@@ -1,8 +1,7 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "lrx-family/shoppy",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "The shoppy project",
     "autoload": {
         "psr-4": { "": "src/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]

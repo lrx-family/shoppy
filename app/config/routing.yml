@@ -20,4 +20,3 @@ app_delete_category:
 app_delete_item:
     path:     /deleteItem/{id}
     defaults: { _controller: AppBundle:Default:deleteItem }
-

@@ -10,14 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $items = $em->getRepository('AppBundle:Item')->findBy(array(), array('label' => 'asc'));
+        $em    = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Item')->findBy([], ['label' => 'asc']);
 
-        return $this->render(':default:item.html.twig', array('items' => $items));
-
-
+        return $this->render(':default:item.html.twig', ['items' => $items]);
     }
 
     public function listCategoriesAction(Request $request)
@@ -26,9 +24,9 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // création du formulaire
-        $cat = new Category();
+        $cat  = new Category();
         $form = $this->createForm('AppBundle\Form\CategoryType', $cat);
-        $form->add('save', SubmitType::class, array('label' => 'Enregistrer'));
+        $form->add('save', SubmitType::class, ['label' => 'Enregistrer']);
 
         $form->handleRequest($request);
 
@@ -41,15 +39,14 @@ class DefaultController extends Controller
         }
 
         // maintenant je récupères toutes les catégories
-        $categories = $em->getRepository('AppBundle:Category')->findBy(array(),array('label'=>'asc'));
+        $categories = $em->getRepository('AppBundle:Category')->findBy([], ['label' => 'asc']);
 
         // et j'affiche ma page
-        return $this->render(':default:categorie.html.twig', array(
+        return $this->render(':default:categorie.html.twig', [
             'categories' => $categories,
-            'form' => $form->createView()
-        ));
+            'form'       => $form->createView()
+        ]);
     }
-
 
     public function addItemAction(Request $request)
     {
@@ -65,25 +62,21 @@ class DefaultController extends Controller
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render(':default:newItem.html.twig', array(
+        return $this->render(':default:newItem.html.twig', [
             'category' => $item,
-            'form' => $form->createView(),
-        ));
-
+            'form'     => $form->createView(),
+        ]);
     }
-
 
     public function resumeAction()
     {
         return $this->render(':default:resume.html.twig');
-
-
     }
 
     public function deleteCategoryAction($id)
     {
         // trouver la categorie correspondante
-        $em = $this->getDoctrine()->getManager();
+        $em       = $this->getDoctrine()->getManager();
         $category = $em->getRepository('AppBundle:Category')->find($id);
 
         // puis la supprimer
@@ -93,12 +86,13 @@ class DefaultController extends Controller
         return $this->redirectToRoute('app_list_categories');
     }
 
-    public function deleteItemAction($id){
-        $em = $this->getDoctrine()->getManager();
+    public function deleteItemAction($id)
+    {
+        $em   = $this->getDoctrine()->getManager();
         $item = $em->getRepository('AppBundle:Item')->find($id);
         $em->remove($item);
         $em->flush();
+
         return $this->redirectToRoute('app_home');
     }
-
 }

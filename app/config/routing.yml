@@ -9,10 +9,6 @@ app_list_categories:
     path:     /categories
     defaults: { _controller: AppBundle:Default:listCategories }
 
-app_create_item:
-    path:     /newItem
-    defaults: { _controller: AppBundle:Default:addItem }
-
 app_delete_category:
     path:     /deleteCategory/{id}
     defaults: { _controller: AppBundle:Default:deleteCategory }
@@ -28,3 +24,7 @@ app_plus_item:
 app_decrease_item:
     path:    /decrease/{id}
     defaults: {_controller: AppBundle:Default:decreaseItem }
+
+app_admin:
+    path:     /admin
+    defaults:  {_controller: AppBundle:Default:admin }

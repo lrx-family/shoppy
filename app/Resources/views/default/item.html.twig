@@ -6,6 +6,17 @@
 
     <h1>Liste de courses</h1>
 
+        <h2>Enregistrer un nouvel article</h2>
+
+        {{ form_start(form) }}
+        <span class='col-md-offset-2 col-md-6'>
+            {{ form_widget(form) }}
+        </span>
+        <span class='col-md-offset-2 col-md-6'>
+            <input type="submit" value="Valider"/>
+        </span>
+        {{ form_end(form) }}
+
     <table class="table">
         <thead>
         <tr>

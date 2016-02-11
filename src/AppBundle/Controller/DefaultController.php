@@ -7,15 +7,31 @@ use AppBundle\Entity\Item;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+
+        $item = new Item();
+        $form = $this->createForm('AppBundle\Form\ItemType', $item);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($item);
+            $em->flush();
+
+            return $this->redirectToRoute('app_home');
+        }
+
+
         $em = $this->getDoctrine()->getManager();
         $items = $em->getRepository('AppBundle:Item')->findBy([], ['label' => 'asc']);
 
-        return $this->render(':default:item.html.twig', ['items' => $items]);
+        return $this->render(':default:item.html.twig', ['items' => $items, 'category' => $item,
+            'form' => $form->createView(),]);
     }
 
     public function listCategoriesAction(Request $request)
@@ -62,15 +78,10 @@ class DefaultController extends Controller
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render(':default:newItem.html.twig', [
+        return $this->render(':default:item.html.twig', [
             'category' => $item,
             'form' => $form->createView(),
         ]);
-    }
-
-    public function resumeAction()
-    {
-        return $this->render(':default:resume.html.twig');
     }
 
     public function deleteCategoryAction($id)
@@ -96,14 +107,13 @@ class DefaultController extends Controller
         return $this->redirectToRoute('app_home');
     }
 
-
     public function plusItemAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $item = $em->getRepository('AppBundle:Item')->find($id);
-                    $item->setQuantity($item->getQuantity() + 1);
-            $em->persist($item);
-            $em->flush();
+        $item->setQuantity($item->getQuantity() + 1);
+        $em->persist($item);
+        $em->flush();
 
         return $this->redirectToRoute('app_home');
     }
@@ -116,8 +126,12 @@ class DefaultController extends Controller
             $item->setQuantity($item->getQuantity() - 1);
             $em->persist($item);
             $em->flush();
-        }        return $this->redirectToRoute('app_home');
+        }
+        return $this->redirectToRoute('app_home');
     }
 
-
+    public function adminAction()
+    {
+        return new Response('<html><body>Admin page!</body></html>');
+    }
 }

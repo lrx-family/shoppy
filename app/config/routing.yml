@@ -20,3 +20,11 @@ app_delete_category:
 app_delete_item:
     path:     /deleteItem/{id}
     defaults: { _controller: AppBundle:Default:deleteItem }
+
+app_plus_item:
+    path:    /add/{id}
+    defaults: {_controller: AppBundle:Default:plusItem }
+
+app_decrease_item:
+    path:    /decrease/{id}
+    defaults: {_controller: AppBundle:Default:decreaseItem }

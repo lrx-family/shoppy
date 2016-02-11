@@ -2,10 +2,8 @@
 
 namespace AppBundle\Form;
 
-use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +13,7 @@ class ItemType extends AbstractType
     {
         $builder
             ->add('label')
-            ->add('quantity', array('attr' => array('min' => 1)))
+            ->add('quantity', \Symfony\Component\Form\Extension\Core\Type\IntegerType::class, array('attr' => array('min' => 0)))
             ->add('category', EntityType::class, [
                 'class' => 'AppBundle\Entity\Category',
                 'choice_label' => 'label',

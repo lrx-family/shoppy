@@ -22,6 +22,8 @@
                 <td>{{ it.label }}</td>
                 <td>{{ it.category.label }}</td>
                 <td>{{ it.quantity }}</td>
+                <td><a href="{{ path('app_plus_item', {id: it.id}) }}">+</a></td>
+                <td><a href="{{ path('app_decrease_item', {id: it.id}) }}">-</a></td>
                 <td><a href="{{ path('app_delete_item', {id: it.id}) }}">delete</a></td>
             </tr>
         {% endfor %}

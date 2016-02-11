@@ -12,7 +12,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $em    = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $items = $em->getRepository('AppBundle:Item')->findBy([], ['label' => 'asc']);
 
         return $this->render(':default:item.html.twig', ['items' => $items]);
@@ -24,7 +24,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // création du formulaire
-        $cat  = new Category();
+        $cat = new Category();
         $form = $this->createForm('AppBundle\Form\CategoryType', $cat);
         $form->add('save', SubmitType::class, ['label' => 'Enregistrer']);
 
@@ -44,7 +44,7 @@ class DefaultController extends Controller
         // et j'affiche ma page
         return $this->render(':default:categorie.html.twig', [
             'categories' => $categories,
-            'form'       => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 
@@ -64,7 +64,7 @@ class DefaultController extends Controller
 
         return $this->render(':default:newItem.html.twig', [
             'category' => $item,
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -76,7 +76,7 @@ class DefaultController extends Controller
     public function deleteCategoryAction($id)
     {
         // trouver la categorie correspondante
-        $em       = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $category = $em->getRepository('AppBundle:Category')->find($id);
 
         // puis la supprimer
@@ -88,11 +88,34 @@ class DefaultController extends Controller
 
     public function deleteItemAction($id)
     {
-        $em   = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $item = $em->getRepository('AppBundle:Item')->find($id);
         $em->remove($item);
         $em->flush();
 
         return $this->redirectToRoute('app_home');
     }
+
+
+    public function plusItemAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $item = $em->getRepository('AppBundle:Item')->find($id);
+        $item->setQuantity($item->getQuantity() + 1);
+        $em->persist($item);
+        $em->flush();
+        return $this->redirectToRoute('app_home');
+    }
+
+    public function decreaseItemAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $item = $em->getRepository('AppBundle:Item')->find($id);
+        $item->setQuantity($item->getQuantity() - 1);
+        $em->persist($item);
+        $em->flush();
+        return $this->redirectToRoute('app_home');
+    }
+
+
 }

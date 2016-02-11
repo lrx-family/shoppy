@@ -101,9 +101,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $item = $em->getRepository('AppBundle:Item')->find($id);
-        $item->setQuantity($item->getQuantity() + 1);
-        $em->persist($item);
-        $em->flush();
+                    $item->setQuantity($item->getQuantity() + 1);
+            $em->persist($item);
+            $em->flush();
+
         return $this->redirectToRoute('app_home');
     }
 
@@ -111,10 +112,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $item = $em->getRepository('AppBundle:Item')->find($id);
-        $item->setQuantity($item->getQuantity() - 1);
-        $em->persist($item);
-        $em->flush();
-        return $this->redirectToRoute('app_home');
+        if ($item->getQuantity() > 0) {
+            $item->setQuantity($item->getQuantity() - 1);
+            $em->persist($item);
+            $em->flush();
+        }        return $this->redirectToRoute('app_home');
     }
 
 

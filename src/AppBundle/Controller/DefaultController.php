@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Item;
+use AppBundle\Form\ItemType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,10 @@ class DefaultController extends Controller
     {
 
         $item = new Item();
-        $form = $this->createForm('AppBundle\Form\ItemType', $item);
+        $form = $this->createForm(ItemType::class, $item, [
+            'attr' => [
+                'class' => 'form-inline'
+            ]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -24,6 +28,9 @@ class DefaultController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('app_home');
+        } else {
+            dump($form->getErrors());
+            dump($form->getData());
         }
 
 
@@ -64,25 +71,6 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function addItemAction(Request $request)
-    {
-        $item = new Item();
-        $form = $this->createForm('AppBundle\Form\ItemType', $item);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($item);
-            $em->flush();
-
-            return $this->redirectToRoute('app_home');
-        }
-
-        return $this->render(':default:item.html.twig', [
-            'category' => $item,
-            'form' => $form->createView(),
-        ]);
-    }
 
     public function deleteCategoryAction($id)
     {
@@ -122,11 +110,15 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $item = $em->getRepository('AppBundle:Item')->find($id);
-        if ($item->getQuantity() > 0) {
+        if ($item->getQuantity() > 1) {
             $item->setQuantity($item->getQuantity() - 1);
             $em->persist($item);
             $em->flush();
+        } elseif ($item->getQuantity() == 1) {
+            $em->remove($item);
+            $em->flush();
         }
+
         return $this->redirectToRoute('app_home');
     }
 

@@ -2,34 +2,36 @@
 
 {% block body %}
 
-    <h1>Liste des catégories</h1>
 
-    <div>
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+    <div class="container" style="padding-top: 15px">
         {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_end(form) }}
     </div>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th> Rayon :</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for cat in categories %}
+    <h3>Liste des rayons</h3>
+    <div class="jumbotron">
+        <table class="table table-striped table-hover">
+            <thead>
             <tr>
-                <td>{{ cat.label }}</td>
-                <td><a href="{{ path('app_delete_category', {id: cat.id}) }}"
-                       onclick="return confirmDelete('{{ cat.label }}');"
-                    >Delete</a></td>
-
-
+                <th> Rayon :</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for cat in categories %}
+                <tr>
+                    <td>{{ cat.label }}</td>
+                    <td><a href="{{ path('app_delete_category', {id: cat.id}) }}"
+                           onclick="return confirmDelete('{{ cat.label }}');"
+                        >Delete</a></td>
 
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
 
 {% block stylesheets %}

@@ -15,6 +15,7 @@ class CategoryType extends AbstractType
         ['label'=>'Rayon']);
     }
 
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

@@ -32,6 +32,12 @@
             </tbody>
         </table>
     </div>
+   <div class="jumbotron">
+        <form>
+            <input type="text" id="recherche" />
+        </form>
+    </div>
+
 {% endblock %}
 
 {% block stylesheets %}
@@ -43,5 +49,18 @@
             var message = 'Confirmer la suppression de ' + label;
             return confirm(message);
         }
+
+
+        var liste = [
+            "Draggable",
+            "Droppable",
+            "Resizable",
+            "Selectable",
+            "Sortable"
+        ];
+
+        $('#recherche').autocomplete({
+            source : liste
+        });
     </script>
 {% endblock %}

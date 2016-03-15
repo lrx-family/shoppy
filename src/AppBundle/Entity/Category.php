@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Class Category
@@ -22,6 +24,7 @@ class Category
     /**
      * @var string
      * @ORM\Column(name="label", type="string", length=200)
+     * @Assert\NotBlank(message="Veuillez saisir un nom valide")
      */
     private $label;
 

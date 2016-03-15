@@ -25,7 +25,7 @@ class Item
     /**
      * @var string
      * @ORM\Column(name="label", type="string", length=200)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Veuillez saisir un nom valide")
      */
     protected $label;
 

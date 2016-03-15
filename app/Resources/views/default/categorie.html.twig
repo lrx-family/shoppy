@@ -1,10 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-
     {% form_theme form 'bootstrap_3_layout.html.twig' %}
-
     <div class="container" style="padding-top: 15px">
         {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -25,42 +22,26 @@
                     <td><a href="{{ path('app_delete_category', {id: cat.id}) }}"
                            onclick="return confirmDelete('{{ cat.label }}');"
                         >Delete</a></td>
-
-
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-   <div class="jumbotron">
+   <div>
         <form>
             <input type="text" id="recherche" />
         </form>
     </div>
-
 {% endblock %}
 
 {% block stylesheets %}
-
 {% endblock %}
+
 {% block javascripts %}
     <script>
         function confirmDelete(label) {
             var message = 'Confirmer la suppression de ' + label;
             return confirm(message);
         }
-
-
-        var liste = [
-            "Draggable",
-            "Droppable",
-            "Resizable",
-            "Selectable",
-            "Sortable"
-        ];
-
-        $('#recherche').autocomplete({
-            source : liste
-        });
     </script>
 {% endblock %}

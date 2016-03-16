@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 
 /**
  * Class Item
  * @ORM\Table(name="items")
+ * @UniqueEntity("label", message="Un tel produit est déjà dans la liste")
  * @ORM\Entity
  */
 class Item
@@ -24,7 +26,7 @@ class Item
 
     /**
      * @var string
-     * @ORM\Column(name="label", type="string", length=200)
+     * @ORM\Column(name="label", type="string", length=200, unique=true)
      * @Assert\NotBlank(message="Veuillez saisir un nom valide")
      */
     protected $label;

@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 
 /**
  * Class Category
  * @ORM\Entity
- * @UniqueEntity("label")
+ * @UniqueEntity("label", message="Une telle catégorie existe déjà. ")
  * @ORM\Table(name="categories")
  */
 class Category
@@ -24,7 +26,7 @@ class Category
 
     /**
      * @var string
-     * @ORM\Column(name="label", type="string", length=200)
+     * @ORM\Column(name="label", type="string", length=200, unique = true)
      * @Assert\NotBlank(message="Veuillez saisir un nom valide")
      */
     private $label;

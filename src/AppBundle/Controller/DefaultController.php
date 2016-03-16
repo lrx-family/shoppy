@@ -58,7 +58,7 @@ class DefaultController extends Controller
         // si le forumlaire est soumis
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            //j'ajoute la ctégorie'
+            //j'ajoute la ctégorie
             $em->persist($cat);
             $em->flush();
         }
@@ -71,36 +71,6 @@ class DefaultController extends Controller
             'categories' => $categories,
             'form' => $form->createView()
         ]);
-    }
-
-    public function ajaxSearchAction(Request $request){
-        // ici je récupère l'entity manager
-        $em = $this->getDoctrine()->getManager();
-
-        // création du formulaire
-        $cat = new Category();
-        $form = $this->createForm('AppBundle\Form\CategoryType', $cat);
-        $form->add('save', SubmitType::class, ['label' => 'Enregistrer']);
-
-        $form->handleRequest($request);
-
-        // si le forumlaire est soumis
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            //j'ajoute la ctégorie'
-            $em->persist($cat);
-            $em->flush();
-        }
-
-        // maintenant je récupère toutes les catégories
-        $categories = $em->getRepository('AppBundle:Category')->findBy([], ['label' => 'asc']);
-
-        $form = $this->container->get('form.factory')->create(new CategorySearchType());
-
-        return $this->container->get('templating')->renderResponse('AppBundle:Default:lister.html.twig', array(
-            'categories' => $categories,
-            'form' => $form->createView()
-        ));
     }
 
 

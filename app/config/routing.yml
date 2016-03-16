@@ -9,6 +9,10 @@ app_list_categories:
     path:     /categories
     defaults: { _controller: AppBundle:Default:listCategories }
 
+rest_list_categories:
+    path:     /rest/categories
+    defaults: { _controller: AppBundle:Rest:listCategories }
+
 app_delete_category:
     path:     /deleteCategory/{id}
     defaults: { _controller: AppBundle:Default:deleteCategory }

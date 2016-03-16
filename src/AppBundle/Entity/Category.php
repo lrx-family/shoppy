@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class Category
  * @ORM\Entity
+ * @UniqueEntity("label")
  * @ORM\Table(name="categories")
  */
 class Category
